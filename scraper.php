@@ -20,31 +20,12 @@ foreach($tab as $table)
 {
  $row=$table->find("tr td span span");
  echo $row[0]->plaintext,$row[1]->plaintext,$row[2]->plaintext;
+ $record = array(
+   'data' => $row[0]->plaintext,
+   'orario' => $row[1]->plaintext,
+   'località' => $row[2]->plaintext,
+ );
+scraperwiki::save_sqlite(array('data','orario','località'), $record); 
 }
 
-die('end');
-//
-// // Write out to the sqlite database using scraperwiki library
-// scraperwiki::save_sqlite(array('name'), array('name' => 'susan', 'occupation' => 'software developer'));
-//
-// // An arbitrary query against the database
-// scraperwiki::select("* from data where 'name'='peter'")
-
-// You don't have to do things with the ScraperWiki library. You can use whatever is installed
-// on Morph for PHP (See https://github.com/openaustralia/morph-docker-php) and all that matters
-// is that your final data is written to an Sqlite database called data.sqlite in the current working directory which
-// has at least a table called data.
-     
-/*
-foreach($dom->find("div[@align='left'] tr") as $data){
-    $tds = $data->find("td");
-    if(count($tds)==12){
-        $record = array(
-            'country' => $tds[0]->plaintext,
-            'years_in_school' => intval($tds[4]->plaintext)
-        );
-        print json_encode($record) . "\n";
-    }
-}
-*/
 ?>
