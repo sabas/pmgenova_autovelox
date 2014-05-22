@@ -18,11 +18,11 @@ array_shift($tab); //il secondo è l'header
 
 foreach($tab as $table)
 {
- $row=$dom->find("tr");
- $cols=$dom->find("td span span");
- var_dump($cols);
+ $row=$dom->find("tr td span span");
+ var_dump($row);
 }
 
+die('end');
 //
 // // Write out to the sqlite database using scraperwiki library
 // scraperwiki::save_sqlite(array('name'), array('name' => 'susan', 'occupation' => 'software developer'));
