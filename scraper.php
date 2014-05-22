@@ -1,4 +1,4 @@
-<?
+<?php
 // This is a template for a PHP scraper on Morph (https://morph.io)
 // including some code snippets below that you should find helpful
 
@@ -19,7 +19,7 @@ array_shift($tab); //il secondo è l'header
 foreach($tab as $table)
 {
  $row=$dom->find("tr td span span");
- var_dump($row);
+ echo $row[0]->plaintext,$row[1]->plaintext,$row[2]->plaintext;
 }
 
 die('end');
