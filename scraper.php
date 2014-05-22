@@ -23,9 +23,9 @@ foreach($tab as $table)
  $record = array(
    'data' => $row[0]->plaintext,
    'orario' => $row[1]->plaintext,
-   'località' => $row[2]->plaintext,
+   'luogo' => $row[2]->plaintext,
  );
-scraperwiki::save_sqlite(array('data','orario','località'), $record); 
+scraperwiki::save_sqlite(array('data','orario','luogo'), $record); 
 }
 
 ?>
