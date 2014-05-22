@@ -18,7 +18,7 @@ array_shift($tab); //il secondo è l'header
 
 foreach($tab as $table)
 {
- $row=$dom->find("tr td span span");
+ $row=$table->find("tr td span span");
  echo $row[0]->plaintext,$row[1]->plaintext,$row[2]->plaintext;
 }
 
