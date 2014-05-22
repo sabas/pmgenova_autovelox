@@ -12,7 +12,17 @@
 $dom = new simple_html_dom();
 $dom->load($html);
 $tab=$dom->find("table");
-$tab=$tab[0];
+
+array_shift($tab); //il primo è il banner
+array_shift($tab); //il secondo è l'header
+
+foreach($tab as $table)
+{
+ $row=$dom->find("tr");
+ $cols=$dom->find("td span span");
+ var_dump($cols);
+}
+
 //
 // // Write out to the sqlite database using scraperwiki library
 // scraperwiki::save_sqlite(array('name'), array('name' => 'susan', 'occupation' => 'software developer'));
