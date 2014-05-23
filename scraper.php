@@ -29,7 +29,7 @@ foreach($tab as $table)
  $start_time=$matches[1].$matches[2];
  $end_time=$matches[3].$matches[4];
  
- $strada=ucwords(trim($row[2]->plaintext));
+ $strada=ucwords(strtolower(trim($row[2]->plaintext)));
  
  $record = array(
    'data' => $date,
