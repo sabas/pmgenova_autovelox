@@ -20,16 +20,16 @@ foreach($tab as $table)
 {
  $row=$table->find("tr td span span");
  
- $date=explode('/',$row[0]->plaintext);
+ $date=explode('/',trim($row[0]->plaintext));
  $date=array_reverse($date);
  $date=implode($date);
  
- $orario=$row[1]->plaintext;
+ $orario=trim($row[1]->plaintext);
  preg_match('/(\d{2}),(\d{2})\/(\d{2}),(\d{2})/',$orario, $matches);
- $start_time=$matches[0].$matches[1];
- $end_time=$matches[2].$matches[3];
+ $start_time=$matches[1].$matches[2];
+ $end_time=$matches[3].$matches[4];
  
- $strada=ucwords($row[2]->plaintext);
+ $strada=ucwords(trim($row[2]->plaintext));
  
  $record = array(
    'data' => $date,
