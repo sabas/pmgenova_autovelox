@@ -20,12 +20,25 @@ foreach($tab as $table)
 {
  $row=$table->find("tr td span span");
  echo $row[0]->plaintext,$row[1]->plaintext,$row[2]->plaintext;
+ 
+ $date=explode('/',$row[0]->plaintext);
+ $date=array_reverse($date);
+ $date=implode($date);
+ 
+ $orario=explode('/',$row[1]->plaintext);
+ preg_match('(/(\d{2}),(\d{2})\/(\d{2}),(\d{2})/',$orario, $matches);
+ $start_time=$matches[0].$matches[1];
+ $end_time=$matches[2].$matches[3];
+ 
+ $strada=ucwords($row[2]->plaintext);
+ 
  $record = array(
-   'data' => $row[0]->plaintext,
-   'orario' => $row[1]->plaintext,
-   'luogo' => $row[2]->plaintext,
+   'data' => $date,
+   'inizio' => $start_time,
+   'fine' => $end_time,
+   'luogo' => $strada
  );
-scraperwiki::save_sqlite(array('data','orario','luogo'), $record); 
+scraperwiki::save_sqlite(array('data','inizio','fine','luogo'), $record); 
 }
 
 ?>
