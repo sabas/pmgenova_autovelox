@@ -19,7 +19,6 @@ array_shift($tab); //il secondo è l'header
 foreach($tab as $table)
 {
  $row=$table->find("tr td span span");
- echo $row[0]->plaintext,$row[1]->plaintext,$row[2]->plaintext;
  
  $date=explode('/',$row[0]->plaintext);
  $date=array_reverse($date);
