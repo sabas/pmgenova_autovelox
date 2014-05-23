@@ -26,7 +26,7 @@ foreach($tab as $table)
  $date=implode($date);
  
  $orario=$row[1]->plaintext;
- preg_match('(/(\d{2}),(\d{2})\/(\d{2}),(\d{2})/',$orario, $matches);
+ preg_match('/(\d{2}),(\d{2})\/(\d{2}),(\d{2})/',$orario, $matches);
  $start_time=$matches[0].$matches[1];
  $end_time=$matches[2].$matches[3];
  
