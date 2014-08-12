@@ -6,31 +6,38 @@
  require 'scraperwiki/simple_html_dom.php';
 //
 // // Read in a page
- $html = scraperwiki::scrape("http://www.agid.gov.it/catalogo-nazionale-programmi-riusabili");
+ $html = scraperwiki::scrape("http://www1.comune.genova.it/poliziamunicipale/velox/velox2.asp");
 //
 // // Find something on the page using css selectors
 $dom = new simple_html_dom();
 $dom->load($html);
-$tab=$dom->find("table.views-table tbody tr");
+$tab=$dom->find("table");
 
+array_shift($tab); //il primo è il banner
+array_shift($tab); //il secondo è l'header
 
-foreach($tab as $row)
+foreach($tab as $table)
 {
- $row=$row->find("td");
- $ID=trim($row[0]);
- $Titolo=trim($row[1]);
- $Anno=trim($row[2]);
- $Amministrazione=trim($row[3]);
- $Scheda_Applicazione=trim($row[4]);
+ $row=$table->find("tr td span span");
+ 
+ $date=explode('/',trim($row[0]->plaintext));
+ $date=array_reverse($date);
+ $date=implode($date);
+ 
+ $orario=trim($row[1]->plaintext);
+ preg_match('/(\d{2}),(\d{2})\/(\d{2}),(\d{2})/',$orario, $matches);
+ $start_time=$matches[1].$matches[2];
+ $end_time=$matches[3].$matches[4];
+ 
+ $strada=ucwords(strtolower(trim($row[2]->plaintext)));
  
  $record = array(
-   'ID' => $ID,
-   'Titolo' => $Titolo,
-   'Anno' => $Anno,
-   'Amministrazione' => $Amministrazione,
-   'Scheda Applicazione' => $Scheda_Applicazione
+   'data' => $date,
+   'inizio' => $start_time,
+   'fine' => $end_time,
+   'luogo' => $strada
  );
- 
-scraperwiki::save_sqlite(array('ID'), $record); 
+scraperwiki::save_sqlite(array('data','inizio','fine','luogo'), $record); 
 }
+
 ?>
